@@ -67,7 +67,7 @@ class RedBlackTree:
         return node2
 
 
-    def __isGParent(self, node):
+    def isGParent(self, node):
         if(node.getLeft() != None):
             if(node.getLeft().getLeft() != None or node.getLeft().getRight() != None):
                 return True
@@ -191,6 +191,8 @@ def main():
     print("testing rotate left, should be the same as before" , RBT)
     RBT.root = RBT.rotateLeft(RBT.root)
     print("testing rotate right, should be the same as before" , RBT)
+    RBT.put(4, 7)
+    print("testing isGParent, should be True:", RBT.isGParent(RBT.root))
 
     newRBT = RedBlackTree()
     newRBT.put(2, 5)
@@ -199,9 +201,13 @@ def main():
     newRBT.root.getLeft().setRed()
     newRBT.root.getRight().setRed()
     print("testing is RBT, should be True:", isRBT(newRBT))
-    print("making it false... it now violates rule 4")
+    newRBT.root.setRed()
+    print("making it false.. it now violates rule 1, should be False:", isRBT(newRBT))
     newRBT.root.getRight().setBlack()
-    print("testing is RBT, should be False:", isRBT(newRBT))
+    print("making it false... it now violates rule 4, should be False", isRBT(newRBT))
+    newRBT.root.setRed()
+    newRBT.root.getRight().setRed()
+    print("making it false... it now violates rule 3, should be False", isRBT(newRBT))
 
 
 
